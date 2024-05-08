@@ -1,0 +1,9 @@
+[package]
+name = "strava_activity_downloader"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[[bin]]
+name = "strava_activity_downloader"
