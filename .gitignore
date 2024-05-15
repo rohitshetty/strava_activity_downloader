@@ -3,3 +3,4 @@ sad
 # Added by cargo
 
 /target
+config.toml

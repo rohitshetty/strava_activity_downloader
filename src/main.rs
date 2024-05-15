@@ -1,9 +1,17 @@
 use clap::{Parser, Subcommand};
+use reqwest::{self, header::AUTHORIZATION};
+use confy;
+use serde_derive::{Serialize, Deserialize};
 
-/*
-#[] here is called as attributes. This is used for various purposes.
-One of them is for automatic implementation of traits - I think of this as method inheritance
-*/
+#[derive(Serialize, Deserialize, Debug)]
+struct StravaConfig {
+    athlete_id: String,
+    access_code: String,
+}
+
+impl ::std::default::Default for StravaConfig {
+    fn default() -> Self { Self { athlete_id: "xxxxx".into(), access_code: "xxxxx".into() } }
+}
 
 #[derive(Debug, Parser)]
 #[command(name = "strava_activity_downloader")]
@@ -19,19 +27,37 @@ enum Commands {
     List,
 }
 
-fn main() {
+#[tokio::main]
+async fn main() ->Result<(), confy::ConfyError> {
+    let cfg:StravaConfig = confy::load_path("./config.toml")?;
+    println!("config: {:?}", cfg);
     let args = Cli::parse();
 
     match args.command {
-        Commands::List => show_activities(),
+        Commands::List => {
+            show_activities(&cfg).await
+        },
     }
+
+    Ok(())
 }
 
 // Define a function that does the listing
-fn show_activities() {
-    println!("Download and show the activities")
-    // Here we first make the api call and sort it chronologically
-    // And return the json / whatever the data format is
+async fn show_activities(config: &StravaConfig) {
+    println!("Download and show the activities");
+    let client = reqwest::Client::new();
+    let url = format!("https://www.strava.com/api/v3/athletes/{}/activities", config.athlete_id);
+    let authorization = format!("Bearer {}", config.access_code);
+    let result = client.get(url)
+    .header(AUTHORIZATION, authorization)
+    .send()
+    .await
+    .unwrap()
+    .text()
+    .await;
+
+    println!("Result: {:?}", result)
+
 }
 
 // fn get_activities() {
