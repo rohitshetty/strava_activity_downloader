@@ -1,0 +1,7 @@
+- [ ] Replace `confy` with `dotenv`
+- [ ] Learn more about Rust's borrowers
+- [ ] Parse reqwest response into json
+- [ ] Get an understanding of serde
+- [ ] Modularise the code for handling better data definition
+- [ ] Add download subcommand for listing + downloading
+- [ ] Check prompt library to show the response from the list activity to select one

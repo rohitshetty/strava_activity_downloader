@@ -12,13 +12,13 @@ Pretty sure there are several different tools that does this job already - but I
 
 You need to get the `refresh_token` and `access_token` with scope `activities:read_all`.
 
-Strava lets you create apps on their platform. This provides `client_secret`, `client_id`, `access_id` (with default `read` scope). Open (API docs)[https://developers.strava.com/docs/getting-started/] and read Part B on how to setup the strava app and get your `client_secret` and `client_id`. The default access_id is not enough for listing activities. We need to "Authenticate" using oAuth to get the new access_code with updated scope.
+Strava lets you create apps on their platform. This provides `client_secret`, `client_id`, `access_id` (with default `read` scope). Open [API docs](https://developers.strava.com/docs/getting-started/) and read Part B on how to setup the strava app and get your `client_secret` and `client_id`. The default access_id is not enough for listing activities. We need to "Authenticate" using oAuth to get the new access_code with updated scope.
 This is a two step process.
 
 1. Making call to Strava to begin the oAuth dance to authenticate and get the `code`. We need the scope: `activity:read_permission`
 2. Exchange the code with strava to get the new `access_code` along with `refresh_token` and other metadata.
 
-Refer to (API docs)[https://developers.strava.com/docs/getting-started/] Part C to know the details on executing 1 & 2 above.
+Refer to [API docs](https://developers.strava.com/docs/getting-started/) Part C to know the details on executing 1 & 2 above.
 If you face any issue with step 1, make sure to check Authorization callback domain in strava api section, and make sure it is localhost (or whatever you pass in the step 1 url).
 
 Here is how it looks for me:
@@ -49,4 +49,4 @@ Currently supported subcommands:
 
 `list` - list all strava activities
 
-Refer to [changelog](./CHANGELOG.md) for changelogs and to [learnlogs](./LEARNLOG.md) for chronological updates on what I learnt building this.
+Refer to [changelog](./CHANGELOG.md) for changelogs and to [learnlogs](./LEARNLOG.md) for chronological updates on what I learnt building this and [todo](./TODO.md) for next tasks.
