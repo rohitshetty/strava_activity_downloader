@@ -1,5 +1,6 @@
 - [ ] Replace `confy` with `dotenv`
 - [ ] Learn more about Rust's borrowers
+- [ ] Learn more about Rust Error handler - what is `?` and `Ok(())`
 - [ ] Parse reqwest response into json
 - [ ] Get an understanding of serde
 - [ ] Modularise the code for handling better data definition
